@@ -12,6 +12,19 @@ int gcd(int a, int h){
     }
 }
 
+int compute(int a, int m, int n)
+{   
+    int y=1;
+    while(m>0){
+        if(m%2==1){
+            y = y*a%n;
+        }
+        a = a*a%n;
+        m/=2;
+    }
+    return y;
+}
+
 void main(){
     int msg, p, q, phi_n, n, e=2, d=e;
     printf("Enter two prime numbers\n");
@@ -39,8 +52,8 @@ void main(){
             d++;
     }
 
-    long long encrypted = fmod(pow(msg, e), n);
-    long long decrypted = fmod(pow(encrypted, d), n);
+    long encrypted = compute(msg,e,n);
+    long decrypted = compute(encrypted, d, n);
 
     printf("q : %d\n", q);
     printf("p : %d\n", p);
